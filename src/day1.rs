@@ -1,23 +1,49 @@
-use crate::util;
+use regex::Regex;
 
 fn distances(inputs: Vec<String>) -> u32 {
     let mut first_list: Vec<u32> = vec![];
     let mut second_list: Vec<u32> = vec![];
+    let mut outputs = vec![];
 
     for line in inputs {
-        let parts: Vec<&str> = line.split(" ").collect();
-        first_list.push(parts[0].parse().expect("Must be an integer"));
-        second_list.push(parts[1].parse().expect("Must be an integer"));
+        let parts: (u32, u32) = split_line_with_regex(&line);
+        first_list.push(parts.0);
+        second_list.push(parts.1);
 
     }
+    first_list.sort();
+    second_list.sort();
 
-    first_list.into_iter().sum()
+    for (idx, fi) in first_list.iter().enumerate() {
+        let sec = second_list[idx];
+        if *fi > sec {
+            outputs.push(fi - sec);
+        } else {
+            outputs.push(sec - fi);
+        }
+    }
+
+    outputs.into_iter().sum()
 }
 
 fn parse_lines_from_str(input: &str) -> Vec<String> {
     input.split("\n").into_iter().map(|s| s.to_string() ).collect::<Vec<String>>()
 }
 
+
+fn split_line_with_regex(line: &str) -> (u32, u32) {
+    let re = Regex::new(r"^(\d+)[\s]+(\d+)$").expect("Should be valid");
+
+    let Some(caps) = re.captures(line) else { panic!("Shouldn't reach this") };
+
+    (caps[1].parse().unwrap(), caps[2].parse().unwrap())
+}
+
+fn main() {
+    let lines = parse_file("inputs/day1.txt");
+    println(distances(lines));
+    None
+}
 
 #[cfg(test)]
 mod tests {
