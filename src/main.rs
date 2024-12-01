@@ -7,13 +7,17 @@ mod day1;
 #[command(version, about, long_about = None)]
 struct Args {
     #[arg(short, long)]
-    day: usize
+    day: usize,
+
+    #[arg(short, long)]
+    part: usize,
 }
 
 fn main() {
     let args = Args::parse();
+
     match args.day {
-        1 => day1::main(),
+        1 => day1::main(args.part),
         _ => panic!("Unknown day!")
     }
 }
