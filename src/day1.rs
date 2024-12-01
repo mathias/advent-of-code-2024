@@ -1,4 +1,5 @@
 use regex::Regex;
+use crate::util::parse_file;
 
 fn distances(inputs: Vec<String>) -> u32 {
     let mut first_list: Vec<u32> = vec![];
@@ -39,10 +40,9 @@ fn split_line_with_regex(line: &str) -> (u32, u32) {
     (caps[1].parse().unwrap(), caps[2].parse().unwrap())
 }
 
-fn main() {
+pub fn main() {
     let lines = parse_file("inputs/day1.txt");
-    println(distances(lines));
-    None
+    println!("{}", distances(lines))
 }
 
 #[cfg(test)]
