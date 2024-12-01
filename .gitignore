@@ -24,4 +24,4 @@ Cargo.lock
 
 /target
 
-inputs/*.txt # AoC input text files
+inputs/ # AoC input text files
