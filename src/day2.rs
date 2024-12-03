@@ -81,6 +81,10 @@ fn safe_values(input: Vec<usize>) -> bool {
 }
 
 fn dampener_safe(input: Vec<usize>) -> bool {
+    safe_values(dampener_inner(input))
+}
+
+fn dampener_inner(input: Vec<usize>) -> Vec<usize> {
     let mut values = input.clone();
     // true is increasing, false is decreasing
     let direction: bool = values[0] < values[1];
@@ -119,7 +123,7 @@ fn dampener_safe(input: Vec<usize>) -> bool {
         prev_idx = Some(idx);
     }
 
-    safe_values(values)
+    values
 }
 
 fn parse_nums(input: &str) -> Vec<usize> {
@@ -190,7 +194,6 @@ mod tests {
         assert_eq!(dampener_safe(parse_nums("1 3 7 4 6")), true, "1 3 7 4 6: Safe from removing the jump from 3 to 7.");
         assert_eq!(dampener_safe(parse_nums("1 3 4 1 5")), true, "1 3 4 1 5: Safe from removing the jump from 4 to 1.");
         assert_eq!(dampener_safe(parse_nums("1 3 4 1 4")), false, "1 3 4 1 4: Unsafe -- removing the jump 4 to 1 leaves 4 4");
-
     }
 
     #[test]
@@ -207,5 +210,19 @@ mod tests {
         assert_eq!(part_2_safe_count(lines), 4);
     }
 
+    //#[test]
+    //fn part_2_comparison_test() {
+        //let lines = parse_file("inputs/day2.txt");
 
+        //for line in lines {
+            //let nums = parse_nums(&line);
+            //if nums.clone() != dampener_inner(nums.clone()) && safe_values(nums.clone()) == dampener_safe(nums.clone()) {
+                //println!("original line:\n[{}]\ndampener safe line:\n[{}]\nsafe after?{}\n",
+                         //nums.clone().into_iter().join(","),
+                         //dampener_inner(nums.clone()).into_iter().join(","),
+                         //dampener_safe(nums.clone()));
+            //}
+        //}
+        //assert_eq!(true, false);
+    //}
 }
