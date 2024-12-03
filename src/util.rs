@@ -8,3 +8,7 @@ pub fn parse_file(file_path: &str) -> Vec<String> {
     }
     lines
 }
+
+pub fn parse_lines_from_str(input: &str) -> Vec<String> {
+    input.split("\n").into_iter().map(|s| s.to_string() ).collect::<Vec<String>>()
+}

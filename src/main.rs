@@ -2,6 +2,7 @@ use clap::Parser;
 
 mod util;
 mod day1;
+mod day2;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -18,6 +19,7 @@ fn main() {
 
     match args.day {
         1 => day1::main(args.part),
+        2 => day2::main(args.part),
         _ => panic!("Unknown day!")
     }
 }
