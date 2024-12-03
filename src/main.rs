@@ -17,6 +17,7 @@ macro_rules! days {
 mod util;
 mod day1;
 mod day2;
+mod day3;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -28,7 +29,7 @@ struct Args {
     part: usize,
 }
 
-days!{ day1 day2 }
+days!{ day1 day2 day3 }
 
 fn main() {
     let args = Args::parse();
