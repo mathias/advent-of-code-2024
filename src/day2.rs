@@ -151,7 +151,6 @@ mod tests {
     use super::*;
     use crate::util::parse_lines_from_str;
 
-
     #[test]
     fn part_1_example() {
         let input = "\

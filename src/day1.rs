@@ -27,11 +27,6 @@ fn distances(inputs: Vec<String>) -> u32 {
     outputs.into_iter().sum()
 }
 
-fn parse_lines_from_str(input: &str) -> Vec<String> {
-    input.split("\n").into_iter().map(|s| s.to_string() ).collect::<Vec<String>>()
-}
-
-
 fn split_line_with_regex(line: &str) -> (u32, u32) {
     let re = Regex::new(r"^(\d+)[\s]+(\d+)$").expect("Should be valid");
 
@@ -90,7 +85,7 @@ pub fn main(part: usize) {
 #[cfg(test)]
 mod tests {
     use super::*;
-
+    use crate::util::parse_lines_from_str;
 
     #[test]
     fn part_1_example() {
